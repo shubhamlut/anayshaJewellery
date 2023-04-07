@@ -27,12 +27,224 @@
 .App-link {
   color: #61dafb;
 }
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap");
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.container {
+  display: flex;
+  justify-content: space-between;
 }
+
+.header-container-one {
+  display: flex;
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+.header-container-two {
+  display: flex;
+  font-family: "Barlow Condensed", sans-serif;
+  color: black;
+}
+
+.header-item {
+  margin: 10px;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.5;
+  text-decoration: none;
+  color: black;
+}
+
+.header-button {
+  margin: 10px;
+  text-align: center;
+  font-size: 15px;
+  text-decoration: none;
+  line-height: 1.5;
+  color: rgb(3, 3, 3);
+}
+
+.container-header {
+  display: flex;
+  justify-content: center;
+  height: 80px;
+  text-align: center;
+  align-items: center;
+  font-family: "Great Vibes", cursive;
+  font-size: 92px;
+  color: goldenrod;
+  margin-bottom: 20px;
+}
+
+.container-navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 20px;
+}
+
+.backgroundImageHome img {
+  text-align: center;
+  justify-content: center;
+  margin-top: 25px;
+  margin-bottom: 154px;
+  width: 216vh;
+  height: 78vh;
+
+  /* background-color: #61dafb; */
+}
+.backgroundImageHome {
+  display: flex;
+  justify-content: center;
+}
+
+.highJewelleryList {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  background-color: rgb(193, 166, 114);
+  width: 1000px;
+  font-family: "Barlow Condensed", sans-serif;
+  gap: 30px;
+  border-radius: 15px;
+}
+
+.highJewelleryListCatagory {
+  margin: 50px;
+  color: rgb(4, 4, 4);
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+ul {
+  list-style-type: none;
+  margin-left: -40px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(236, 236, 230);
+  height: 17vh;
+  text-align: center;
+  gap: 100px;
+  font-family: "Barlow Condensed", sans-serif;
+  font-size: 20px;
+  color: grey;
+
+  /* position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px; */
+  
+}
+
+.footer-rights {
+  /* display: flex; */
+  /* justify-content: center;
+  background-color: rgb(236, 236, 230);
+  color: grey;
+  height: 4vh;
+  width: 100%; */
+}
+
+.Subbody {
+  margin-top: 0px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  background-color: rgb(247, 247, 242);
+  height: 400px;
+}
+
+.Subbody img {
+  width: 200px;
+  align-self: center;
+}
+
+.subbodyheader {
+  display: flex;
+  justify-content: center;
+  margin-top: -100px;
+  text-align: center;
+  flex-direction: column;
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+.subbodyheader p {
+  font-size: 20px;
+  margin-bottom: -46px;
+}
+.subbodyheader h2 {
+  font-size: 50px;
+}
+
+.Link {
+  color: rgb(221, 206, 206);
+  text-decoration: none;
+}
+
+.dark {
+  color: rgb(199, 150, 60);
+}
+
+.image {
+  margin-top: 20px;
+  width: 240px;
+  height: 250px;
+  margin-right: 20px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  gap: 10px;
+  margin-left: 195px;
+  font-family: "Barlow Condensed", sans-serif;
+}
+.loginHeader {
+  margin-left: 195px;
+  font-family: "Barlow Condensed", sans-serif;
+}
+
+.loginButton {
+  width: 50px;
+  font-family: "Barlow Condensed", sans-serif;
+  margin-bottom: 10px;
+  padding: 4px;
+  margin-top: 10px;
+
+  background-color: rgb(236, 216, 165);
+
+  border-radius: 5px;
+}
+
+.loginemail {
+  padding: 4px;
+}
+.loginpassword {
+  padding: 4px;
+}
+
+
+.search input{
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  font-family: "Barlow Condensed", sans-serif;
+  border-color: gray;
+  border-radius: 10px;
+  flex-direction: column;
+}
+
+.search i{
+ 
+    font-size: 12px;
+    
+}
+
