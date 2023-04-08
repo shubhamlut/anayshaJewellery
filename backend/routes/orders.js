@@ -12,11 +12,12 @@ var fetchUsers = require("../middleware/fetchuser");
 router.get("/getuserorders", fetchUsers, async (req, res) => {
   userId = req.user.id;
   const orders = await Orders.find({ user: userId });
+  
   res.status(200).send(orders);
 });
 
 
-//Route 2: Create Order for specific user (Login required)
+//Route 2: Place/Create Order for specific user (Login required)
 
 router.post("/createorder", fetchUsers, async (req, res) => {
   try {
