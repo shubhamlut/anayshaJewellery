@@ -23,6 +23,10 @@ const userSchema = new Schema({
     date:{
         type:Date,
         default: Date.now
+    },
+    shippingAddress:{
+        type:String,
+        default:"To Be Decided"
     }
 })
 

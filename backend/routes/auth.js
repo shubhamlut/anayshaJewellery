@@ -93,10 +93,10 @@ router.post(
       );
       if (!passwordCompare) {
         return res
-        .status(400)
-        .json({ error: "Please try to login with valid credentials" });
+          .status(400)
+          .json({ error: "Please try to login with valid credentials" });
       }
-      
+
       const data = {
         user: {
           id: user.id,
@@ -110,4 +110,50 @@ router.post(
   }
 );
 
-    module.exports = router;
+
+//Route 4: Update password
+
+router.post('/updatepassword', [
+  body("password", "Enter the valid password").isLength({ min: 6 }),
+], fetchUsers, async (req, res) => {
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+  try {
+    var salt = await bcrypt.genSaltSync(10);
+    var securedPassword = await bcrypt.hashSync(req.body.password, salt);
+
+    order = await User.findByIdAndUpdate(
+      req.user.id,
+      { $set: { password: securedPassword } },
+      { new: true }
+    );
+
+    console.log(order)
+    res.status(200).send("Password Updated")
+  } catch (error) {
+    res.status(400).json({ error: "Internal Server Error" });
+  }
+})
+
+
+//Route 5: Add/Update Shipping address
+
+router.post('/updateshippingaddress', [body("shippingAddress", "Enter Valid shipping address").isLength({ min: 8 })], fetchUsers, async (req, res) => {
+
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() })
+  }
+  try {
+
+    user = await User.findByIdAndUpdate(req.user.id, { $set: { shippingAddress: req.body.shippingAddress } },
+      { new: true });
+
+    res.status(200).send("Address Updated")
+  } catch (error) {
+    res.status(400).json({ error: "Internal Server Error" });
+  }
+})
+module.exports = router;
