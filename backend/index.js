@@ -16,7 +16,7 @@ app.use('/api/orders',require('./routes/orders'))
 app.use('/api/orderlikes',require('./routes/likes'))
 app.use('/api/cart',require('./routes/cart'))
 app.use('/api/email',require('./routes/email'))
-
+app.use('/api/product',require('./routes/products'))
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
