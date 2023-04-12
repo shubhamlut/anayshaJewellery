@@ -35,6 +35,7 @@ function arrayBufferToString(arrayBuffer) {
   }
   return byteString;
 }
+
 //Route 1: Add products
 
 router.post("/uploadproduct", upload, async (req, res) => {
@@ -59,10 +60,48 @@ router.post("/uploadproduct", upload, async (req, res) => {
 //Route 2: Get all products
 router.get("/getallproducts", async (req, res) => {
   const allproducts = await Products.find();
-  allproducts.map((singleProduct) => {
-    let data = arrayBufferToString(singleProduct.productImage.data);
-    return res.status(200).json({ base64: btoa(data) });
+
+  let modifiedProducts = allproducts.map((singleProduct) => {
+    return {
+      productName:singleProduct.productName,
+      productDescription:singleProduct.productDescription,
+      productPrice:singleProduct.productPrice,
+      productCategory:singleProduct.productCategory,
+      productImage: btoa(arrayBufferToString(singleProduct.productImage.data))
+    }
+    
   });
+  res.status(200).send(modifiedProducts);
+});
+
+//Route 3: Update products
+
+router.post("/updateproduct/:id", upload, async (req, res) => {
+  try {
+    console.log(req.file);
+    newImage = fs.readFileSync("productImages/" + req.file.filename);
+    console.log(newImage);
+    product = await Products.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: {
+          productName: req.body.productName,
+          productDescription: req.body.productDescription,
+          productCategory: req.body.productCategory,
+          productPrice: req.body.productPrice,
+          productImage: {
+            data: newImage,
+            contentType: "image/jpeg",
+          },
+        },
+      },
+      { new: true }
+    );
+
+    res.status(200).send(product);
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
 });
 
 module.exports = router;
