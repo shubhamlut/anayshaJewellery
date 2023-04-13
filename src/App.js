@@ -19,27 +19,64 @@ import LimitedEdition from "./components/LimitedEdition";
 import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Search from "./components/Search";
+import Globalloginpage from "./components/Globalloginpage";
+import { useState } from "react";
+import Adminportal from "./components/Adminportal";
 
 function App() {
+  const [showComponents, setShowComponents] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowComponents(true);
+  };
+
   return (
-    <Router>
-      <Header />
-      <Navbar />
-     
+    <div>
+      {showComponents ? (
+        <Router>
+          <Header />
+          <Navbar />
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/wishlist" element={<Wishlist />} />
-        <Route path="/mybag" element={<Mybag />} />
-        <Route path="/userdetails" element={<Login />} />
-        <Route path="/limitededition" element={<LimitedEdition />} />
-        <Route path="/oneofkind" element={<OneOfKindJewellery />} />
-        <Route path="/search" element={<Search />} />
-      </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/mybag" element={<Mybag />} />
+            <Route path="/userdetails" element={<Login />} />
+            <Route path="/limitededition" element={<LimitedEdition />} />
+            <Route path="/oneofkind" element={<OneOfKindJewellery />} />
+            <Route path="/search" element={<Search />} />
+          </Routes>
 
-      <Footer/>
-    </Router>
+          <Footer />
+        </Router>
+      ) : (
+        <Router>
+          <Routes>
+            <Route path="/adminshubhamlutade" element={<Globalloginpage />} />
+            <Route path="/adminportal" element={<Adminportal />} />
+          </Routes>
+        </Router>
+      )}
+    </div>
   );
 }
 
 export default App;
+
+{/* <Router>
+  <Header />
+  <Navbar />
+
+  <Routes>
+    <Route path="/home" element={<Home />} />
+    <Route path="/wishlist" element={<Wishlist />} />
+    <Route path="/mybag" element={<Mybag />} />
+    <Route path="/userdetails" element={<Login />} />
+    <Route path="/limitededition" element={<LimitedEdition />} />
+    <Route path="/oneofkind" element={<OneOfKindJewellery />} />
+    <Route path="/search" element={<Search />} />
+    <Route path="/adminshubhamlutade" element={<Globalloginpage />} />
+  </Routes>
+
+  <Footer />
+</Router>; */}

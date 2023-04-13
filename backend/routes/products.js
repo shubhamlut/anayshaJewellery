@@ -63,13 +63,12 @@ router.get("/getallproducts", async (req, res) => {
 
   let modifiedProducts = allproducts.map((singleProduct) => {
     return {
-      productName:singleProduct.productName,
-      productDescription:singleProduct.productDescription,
-      productPrice:singleProduct.productPrice,
-      productCategory:singleProduct.productCategory,
-      productImage: btoa(arrayBufferToString(singleProduct.productImage.data))
-    }
-    
+      productName: singleProduct.productName,
+      productDescription: singleProduct.productDescription,
+      productPrice: singleProduct.productPrice,
+      productCategory: singleProduct.productCategory,
+      productImage: btoa(arrayBufferToString(singleProduct.productImage.data)),
+    };
   });
   res.status(200).send(modifiedProducts);
 });
