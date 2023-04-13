@@ -21,7 +21,7 @@ import Login from "./components/Login";
 import Search from "./components/Search";
 import Globalloginpage from "./components/Globalloginpage";
 import { useState } from "react";
-import Adminportal from "./components/Adminportal";
+import Adminportal from "./components/AdminScreen/Adminportal";
 
 function App() {
   const [showComponents, setShowComponents] = useState(false);

@@ -248,3 +248,15 @@ ul {
     
 }
 
+
+table{
+  border: 1px solid black
+}
+
+.addproductModal{
+  display: flex;
+  
+  flex-direction: column;
+  border: 1px solid black
+}
+
