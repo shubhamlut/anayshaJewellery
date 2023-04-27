@@ -39,6 +39,7 @@ function arrayBufferToString(arrayBuffer) {
 //Route 1: Add products
 
 router.post("/uploadproduct", upload, async (req, res) => {
+  console.log(req.file);
   try {
     const newProduct = new Products({
       productName: req.body.productName,
@@ -63,6 +64,7 @@ router.get("/getallproducts", async (req, res) => {
 
   let modifiedProducts = allproducts.map((singleProduct) => {
     return {
+      productId: singleProduct._id,
       productName: singleProduct.productName,
       productDescription: singleProduct.productDescription,
       productPrice: singleProduct.productPrice,
@@ -77,9 +79,12 @@ router.get("/getallproducts", async (req, res) => {
 
 router.post("/updateproduct/:id", upload, async (req, res) => {
   try {
-    console.log(req.file);
-    newImage = fs.readFileSync("productImages/" + req.file.filename);
-    console.log(newImage);
+    
+    let newImage = "";
+    if (!req.file === undefined) {
+      newImage = fs.readFileSync("productImages/" + req.file.filename);
+      console.log(newImage)
+    }
     product = await Products.findByIdAndUpdate(
       req.params.id,
       {

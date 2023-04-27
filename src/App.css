@@ -142,14 +142,7 @@ ul {
   
 }
 
-.footer-rights {
-  /* display: flex; */
-  /* justify-content: center;
-  background-color: rgb(236, 236, 230);
-  color: grey;
-  height: 4vh;
-  width: 100%; */
-}
+
 
 .Subbody {
   margin-top: 0px;
@@ -256,7 +249,11 @@ table{
 .addproductModal{
   display: flex;
   
-  flex-direction: column;
+  flex-direction: row;
   border: 1px solid black
+}
+
+.selected{
+  background-color: rgb(247, 235, 221);
 }
 

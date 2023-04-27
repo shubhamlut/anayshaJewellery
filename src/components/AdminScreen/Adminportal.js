@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Addproductmodal from "./Addproductmodal";
+import UpdateProductModal from "./UpdateproductModal";
 
 const Adminportal = () => {
   const navigate = useNavigate();
@@ -17,10 +18,16 @@ const Adminportal = () => {
     },
   ]);
 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedRow, setSelectedRow] = useState("");
+  const [btnUpdateProduct, setBtnUpdateProduct] = useState(true);
+  const [showUpdateProductModal, setShowUpdateProductModal] = useState(false);
 
-  const [showModal,setShowModal] = useState(false)
-
-
+  const handleRowClick = (item) => {
+    setSelectedRow(item);
+    setBtnUpdateProduct(false);
+    console.log("test11",item)
+  };
   //This function is used to logout from the application
   const logout = () => {
     localStorage.removeItem("token");
@@ -29,11 +36,18 @@ const Adminportal = () => {
 
   //This function is used to add the product
   const addProduct = () => {
-    setShowModal(true)
+    setShowModal(true);
   };
 
+  const updateProduct = () => {
+    setShowUpdateProductModal(true);
+  };
+
+  const closeUpdateProductModal = () => {
+    setShowUpdateProductModal(false);
+  };
   const closeAddProductModal = () => {
-    setShowModal(false)
+    setShowModal(false);
   };
 
   //This is triggered on page load
@@ -54,6 +68,7 @@ const Adminportal = () => {
     );
     retrievedProducts = await response.json();
     setProduct(retrievedProducts);
+    console.log(retrievedProducts);
   };
 
   //This is Admin portal UI
@@ -67,25 +82,44 @@ const Adminportal = () => {
         <p>This is admin portal. Dashboard building in progress</p>
         <button onClick={logout}>Logout</button>
         <button onClick={addProduct}>Add Product</button>
+        <button onClick={updateProduct} disabled={btnUpdateProduct}>
+          Update Product
+        </button>
       </div>
-<div>{showModal && <Addproductmodal closeAddProductModal = {closeAddProductModal}/>}</div>
+      <div>
+        {showModal && (
+          <Addproductmodal closeAddProductModal={closeAddProductModal} />
+        )}
+        {showUpdateProductModal && (
+          <UpdateProductModal
+            closeUpdateProductModal={closeUpdateProductModal}
+            selectedProduct={selectedRow}
+            updateProduct={updateProduct}
+          />
+        )}
+      </div>
       <table>
         <thead>
-        <tr>
-          <th>Product Name</th>
-          <th>Product Description</th>
-          <th>Product Price</th>
-          <th>Product Category</th>
-          <th>Product Image</th>
-        </tr>
+          <tr>
+            <th>Product Name</th>
+            <th>Product Description</th>
+            <th>Product Price</th>
+            <th>Product Category</th>
+            <th>Product Image</th>
+          </tr>
         </thead>
         <tbody>
           {product.map((item) => (
-            <tr>
+            <tr
+              key={item.productId}
+              onClick={() => handleRowClick(item)}
+              className={selectedRow === item ? "selected" : ""}
+            >
               <td>{item.productDescription}</td>
               <td>{item.productCategory}</td>
               <td>{item.productPrice}</td>
               <td>{item.productName}</td>
+
               <td>
                 <img
                   src={`data:image/png;base64,${item.productImage}`}

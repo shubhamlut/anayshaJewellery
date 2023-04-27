@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const Addproductmodal = (props) => {
+const UpdateProductModal = (props) => {
+  //console.log(props.selectedProduct.productName)
   const [addProductDetails, setAddProductDetails] = useState({
     productName: "",
     productDescription: "",
@@ -9,6 +10,19 @@ const Addproductmodal = (props) => {
     productImages: null,
   });
 
+  useEffect(() => {
+    onPageLoad();
+    console.log("test");
+  }, [props.selectedProduct]);
+  const onPageLoad = () => {
+    setAddProductDetails({
+      productName: props.selectedProduct.productName,
+      productDescription: props.selectedProduct.productDescription,
+      productCategory: props.selectedProduct.productCategory,
+      productPrice: props.selectedProduct.productPrice,
+      
+    });
+  };
   const onChange = (e) => {
     setAddProductDetails({
       ...addProductDetails,
@@ -33,20 +47,10 @@ const Addproductmodal = (props) => {
 
     console.log(formData);
     const response = await fetch(
-      `http://localhost:5000/api/product/uploadproduct`,
+      `http://localhost:5000/api/product/updateproduct/${props.selectedProduct.productId}`,
       {
         method: "POST",
         body: formData,
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify({
-        //   productName: addProductDetails.productName,
-        //   productDescription: addProductDetails.productDescription,
-        //   productCategory: addProductDetails.productCategory,
-        //   productPrice: addProductDetails.productPrice,
-        //   productImages: file
-        // }),
       }
     );
     const json = await response.json();
@@ -61,7 +65,7 @@ const Addproductmodal = (props) => {
         id="form"
         action=""
       >
-        <button onClick={props.closeAddProductModal}>X</button>
+        <button onClick={props.closeUpdateProductModal}>X</button>
         <label htmlFor="productName">Product Name</label>
         <input
           type="text"
@@ -112,4 +116,4 @@ const Addproductmodal = (props) => {
   );
 };
 
-export default Addproductmodal;
+export default UpdateProductModal;
