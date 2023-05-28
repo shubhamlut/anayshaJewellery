@@ -1,0 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
+
+.mybag-Container {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(241, 246, 244);
+  width: 100vh;
+  margin-left: 20px;
+  padding-left: 10px;
+  font-family: "Poppins", sans-serif;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: auto;
+  /* width: 300px; Set the desired width */
+  height: 600px; /* Set the desired height */
+}
+
+.remove-add-button {
+  /* background-color: rgb(182, 201, 217); */
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: rgb(0, 0, 0);
+  gap: 5px;
+  display: flex;
+}
+
+
+
+.orderItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mybag-parentContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.subtotal {
+  width: 50vh;
+  background-color: aliceblue;
+  display: flex;
+  /* justify-content: center; */
+  margin-left: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+}
+
+.proceedToCheckout{
+  width: 200px;
+  height: 40px;
+  margin-left: 25px;
+  margin-top: 100px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  border: none;
+  background-color: rgb(200, 200, 247);
+}

@@ -52,7 +52,7 @@ router.post("/uploadproduct", upload, async (req, res) => {
       },
     });
     await newProduct.save();
-    res.send("File Uploaded");
+    res.json({ message: "File Uploaded", status: true });
   } catch (error) {
     res.status(400).send(error);
   }
@@ -79,11 +79,10 @@ router.get("/getallproducts", async (req, res) => {
 
 router.post("/updateproduct/:id", upload, async (req, res) => {
   try {
-    
     let newImage = "";
-    if (!req.file === undefined) {
+
+    if (req.file !== undefined) {
       newImage = fs.readFileSync("productImages/" + req.file.filename);
-      console.log(newImage)
     }
     product = await Products.findByIdAndUpdate(
       req.params.id,
@@ -101,11 +100,22 @@ router.post("/updateproduct/:id", upload, async (req, res) => {
       },
       { new: true }
     );
+    res.json({ product: product, status: true });
 
-    res.status(200).send(product);
   } catch (error) {
     res.status(400).send(error.message);
   }
 });
 
+//Route 4: Delete Product
+
+router.post("/deleteproduct/:id", async (req, res) => {
+  try {
+    product = await Products.findByIdAndDelete(req.params.id);
+
+    res.status(200).json({message:"Deleted Successfully",status:true});
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
 module.exports = router;

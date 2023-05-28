@@ -22,9 +22,10 @@ import Search from "./components/Search";
 import Globalloginpage from "./components/Globalloginpage";
 import { useState } from "react";
 import Adminportal from "./components/AdminScreen/Adminportal";
+import LoaderState from "./context/loaderState";
 
 function App() {
-  const [showComponents, setShowComponents] = useState(false);
+  const [showComponents, setShowComponents] = useState(true);
 
   const handleButtonClick = () => {
     setShowComponents(true);
@@ -33,28 +34,30 @@ function App() {
   return (
     <div>
       {showComponents ? (
+        <LoaderState>
         <Router>
           <Header />
-          <Navbar />
+          {/* <Navbar /> */}
 
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/mybag" element={<Mybag />} />
-            <Route path="/userdetails" element={<Login />} />
+            <Route path="/userdetails" element={<Userdetails />} />
             <Route path="/limitededition" element={<LimitedEdition />} />
             <Route path="/oneofkind" element={<OneOfKindJewellery />} />
             <Route path="/search" element={<Search />} />
+            <Route path="/login" element={<Globalloginpage />} />
+            <Route path="/adminportal" element={<Adminportal />} />
+            <Route path="/adminshubhamlutade" element={<Globalloginpage />} />
           </Routes>
 
           <Footer />
         </Router>
+        </LoaderState>
       ) : (
         <Router>
-          <Routes>
-            <Route path="/adminshubhamlutade" element={<Globalloginpage />} />
-            <Route path="/adminportal" element={<Adminportal />} />
-          </Routes>
+          <Routes></Routes>
         </Router>
       )}
     </div>
@@ -62,21 +65,3 @@ function App() {
 }
 
 export default App;
-
-{/* <Router>
-  <Header />
-  <Navbar />
-
-  <Routes>
-    <Route path="/home" element={<Home />} />
-    <Route path="/wishlist" element={<Wishlist />} />
-    <Route path="/mybag" element={<Mybag />} />
-    <Route path="/userdetails" element={<Login />} />
-    <Route path="/limitededition" element={<LimitedEdition />} />
-    <Route path="/oneofkind" element={<OneOfKindJewellery />} />
-    <Route path="/search" element={<Search />} />
-    <Route path="/adminshubhamlutade" element={<Globalloginpage />} />
-  </Routes>
-
-  <Footer />
-</Router>; */}

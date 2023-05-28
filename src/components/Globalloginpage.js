@@ -24,7 +24,13 @@ const Globalloginpage = () => {
     if (json.status == "Successful") {
       //Save the token and redirect to home page
       localStorage.setItem("token", json.jwtToken);
+      if(json.category =="Admin"){
       navigate("/adminportal");
+      }
+      else{
+        navigate("/");
+        
+      }
     } else {
       alert("Invalid Creadtials", "danger");
     }
@@ -33,7 +39,7 @@ const Globalloginpage = () => {
   return (
     <div>
       <div className="loginHeader">
-        <h2>Admin Login</h2>
+        <h2>Login</h2>
       </div>
       <form onSubmit={onSubmitHandle} className="loginForm">
         <label for="email">Email Address</label>

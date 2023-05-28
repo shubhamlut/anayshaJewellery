@@ -12,7 +12,6 @@ const cartSchema = new Schema({
     ref: "orders",
   },
 
-
   orderStatus: {
     type: String,
     default: "In Cart",
@@ -26,6 +25,16 @@ const cartSchema = new Schema({
     type: Number,
     required: true,
   },
+
+  orderName: {
+    type: String,
+    required: true,
+  },
+
+  // orderImage: {
+  //   data: Buffer,
+  //   contentType: String,
+  // },
 });
 
-module.exports =  mongoose.model('cart',cartSchema)
+module.exports = mongoose.model("cart", cartSchema);

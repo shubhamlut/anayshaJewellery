@@ -1,0 +1,32 @@
+.slider {
+    width: 300px; /* Set the desired width of the slider */
+    height: 500px; /* Set the desired height of the slider */
+    overflow: hidden;
+  }
+  
+  .slider-images {
+    display: flex;
+    width: 300%; /* Make the container wide enough to fit all images */
+    animation: slide 10s infinite; /* Adjust the animation duration and timing as per your preference */
+  }
+  
+  .slider-images img {
+    width: 33.333%; /* Divide the width evenly among the images */
+    object-fit: cover;
+  }
+  
+  @keyframes slide {
+    0% {
+      transform: translateX(0);
+    }
+    33.33% {
+      transform: translateX(-100%); /* Move to the next image */
+    }
+    66.66% {
+      transform: translateX(-200%); /* Move to the second image */
+    }
+    100% {
+      transform: translateX(0); /* Return to the first image */
+    }
+  }
+  

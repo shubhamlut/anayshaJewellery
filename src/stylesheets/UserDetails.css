@@ -1,0 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+
+.userDetails-Container {
+  display: flex;
+  padding-left: 40px;
+  padding-top: 40px;
+  /* justify-content: center; */
+  /* align-items: center; */
+  height: 39vh;
+  flex-direction: row;
+}
+.userEnteredDetails{
+    font-family: 'Poppins', sans-serif;
+}
+.userDetails {
+  display: flex;
+  flex-direction: column;
+  width: 400px; /* Adjust the width as per your preference */
+  padding: 20px;
+  background-color: #fcfcfc;
+  border-radius: 5px;
+  height: 34vh;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  gap: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+.userAddress {
+  height: 100px;
+}
+
+.userDetailsActionButtons {
+  display: flex;
+  margin-right: 10px;
+  gap: 200px;
+  margin-top: 10px;
+  font-family: 'Poppins', sans-serif;
+  
+}
+
+
+.updateButton {
+    
+    background-color: rgb(247, 205, 40);
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+}
+
+.saveChangesButton {
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(52, 155, 245);
+    height: 30px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+}

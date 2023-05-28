@@ -8,7 +8,7 @@ const Body = () => {
   return (
     <>
     <div className='backgroundImageHome'>
-      <img src={AnayshaWebsitebg} alt="please wait.." />
+      
     </div>
     
     </>

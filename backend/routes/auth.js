@@ -108,7 +108,7 @@ router.post(
         },
       };
       const jwtData = jwt.sign(data, JWT_SECRET);
-      res.status(200).json({ status: "Successful", jwtToken: jwtData });
+      res.status(200).json({ status: "Successful", jwtToken: jwtData,category:user.category });
     } catch (error) {
       res.status(400).json({ error: "Internal Server Error" });
     }

@@ -27,42 +27,45 @@
 .App-link {
   color: #61dafb;
 }
-@import url("https://fonts.googleapis.com/css2?family=Exo+2:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap");
 
 .container {
   display: flex;
   justify-content: space-between;
+  height: 60px;
+  background-color: #1C315E;
+  color: #27374D;
+ 
 }
 
 .header-container-one {
   display: flex;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Poppins", sans-serif;
+  font-size: 10px;
 }
 
 .header-container-two {
   display: flex;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: black;
 }
 
 .header-item {
   margin: 10px;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1.5;
   text-decoration: none;
-  color: black;
+  color: #DDE6ED
 }
 
 .header-button {
   margin: 10px;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
   text-decoration: none;
   line-height: 1.5;
-  color: rgb(3, 3, 3);
+  color: #DDE6ED
 }
 
 .container-header {
@@ -71,7 +74,7 @@
   height: 80px;
   text-align: center;
   align-items: center;
-  font-family: "Great Vibes", cursive;
+  /* font-family: "Great Vibes", cursive; */
   font-size: 92px;
   color: goldenrod;
   margin-bottom: 20px;
@@ -82,7 +85,7 @@
   justify-content: center;
   align-items: center;
   gap: 100px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 20px;
 }
 
@@ -107,7 +110,7 @@
   flex-direction: row;
   background-color: rgb(193, 166, 114);
   width: 1000px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Poppins", sans-serif;
   gap: 30px;
   border-radius: 15px;
 }
@@ -128,21 +131,17 @@ ul {
   display: flex;
   justify-content: center;
   background-color: rgb(236, 236, 230);
-  height: 17vh;
-  text-align: center;
-  gap: 100px;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 20px;
-  color: grey;
-
-  /* position: absolute;
+  left: 0;
   bottom: 0;
   width: 100%;
-  height: 50px; */
-  
+  height: 130px;
+  text-align: center;
+  gap: 100px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  color: grey;
+  position: fixed;
 }
-
-
 
 .Subbody {
   margin-top: 0px;
@@ -165,7 +164,7 @@ ul {
   margin-top: -100px;
   text-align: center;
   flex-direction: column;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .subbodyheader p {
@@ -177,7 +176,7 @@ ul {
 }
 
 .Link {
-  color: rgb(221, 206, 206);
+  color:#DDE6ED;
   text-decoration: none;
 }
 
@@ -198,16 +197,16 @@ ul {
   width: 300px;
   gap: 10px;
   margin-left: 195px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 .loginHeader {
   margin-left: 195px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .loginButton {
   width: 50px;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Poppins", sans-serif;
   margin-bottom: 10px;
   padding: 4px;
   margin-top: 10px;
@@ -224,36 +223,26 @@ ul {
   padding: 4px;
 }
 
-
-.search input{
+.search input {
   margin-top: 50px;
   display: flex;
   justify-content: center;
-  font-family: "Barlow Condensed", sans-serif;
+  font-family: "Poppins", sans-serif;
   border-color: gray;
   border-radius: 10px;
   flex-direction: column;
 }
 
-.search i{
- 
-    font-size: 12px;
-    
+.search i {
+  font-size: 12px;
 }
 
-
-table{
-  border: 1px solid black
+table {
+  border: 1px solid black;
 }
 
-.addproductModal{
+.addproductModal {
   display: flex;
-  
   flex-direction: row;
-  border: 1px solid black
+  border: 1px solid black;
 }
-
-.selected{
-  background-color: rgb(247, 235, 221);
-}
-

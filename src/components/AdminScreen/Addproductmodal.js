@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../AdminScreenCSS/AddproductModal.css";
 
 const Addproductmodal = (props) => {
   const [addProductDetails, setAddProductDetails] = useState({
@@ -31,37 +32,33 @@ const Addproductmodal = (props) => {
     formData.append("productCategory", addProductDetails.productCategory);
     formData.append("productPrice", addProductDetails.productPrice);
 
-    console.log(formData);
     const response = await fetch(
       `http://localhost:5000/api/product/uploadproduct`,
       {
         method: "POST",
         body: formData,
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
-        // body: JSON.stringify({
-        //   productName: addProductDetails.productName,
-        //   productDescription: addProductDetails.productDescription,
-        //   productCategory: addProductDetails.productCategory,
-        //   productPrice: addProductDetails.productPrice,
-        //   productImages: file
-        // }),
       }
     );
     const json = await response.json();
-    console.log(json);
+    if (json.status) {
+      props.onProductUpdate();
+      props.closeAddProductModal()
+    }
   };
 
   return (
-    <div>
+   <>
+   <div className="modalWrapper"></div>
+    <div className="addModalContainer">
       <form
         onSubmit={onSubmitHandle}
         className="addproductModal"
         id="form"
         action=""
       >
-        <button onClick={props.closeAddProductModal}>X</button>
+        <a onClick={props.closeAddProductModal} className="closeAddModal">
+          <span class="close">&times;</span>
+        </a>
         <label htmlFor="productName">Product Name</label>
         <input
           type="text"
@@ -106,9 +103,10 @@ const Addproductmodal = (props) => {
           name="productImages"
           onChange={handleFileChange}
         />
-        <input type="submit" className="submitButton" value="Submit" />
+        <input type="submit" className="submitButton"  value="Submit" />
       </form>
     </div>
+    </>
   );
 };
 

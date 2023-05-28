@@ -1,32 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Addproductmodal from "./Addproductmodal";
 import UpdateProductModal from "./UpdateproductModal";
-
+import "../AdminScreenCSS/AddproductModal.css";
+import Loader from "./Loader";
+import Admintable from "./Admintable";
+import loaderContext from "../../context/loaderContext";
 const Adminportal = () => {
   const navigate = useNavigate();
   let retrievedProducts = "";
-
+  const Spinner = useContext(loaderContext);
   //useState for product those are displayed on the dashboard
-  const [product, setProduct] = useState([
-    {
-      productName: "test",
-      productDescription: "test",
-      productPrice: "test",
-      productCategory: "test",
-      productImage: "test",
-    },
-  ]);
+  const [product, setProduct] = useState([{}]);
 
   const [showModal, setShowModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState("");
   const [btnUpdateProduct, setBtnUpdateProduct] = useState(true);
   const [showUpdateProductModal, setShowUpdateProductModal] = useState(false);
+  const [productUpdate, setProductUpdate] = useState(0);
+  const [showTable, setShowTable] = useState(false);
+  
+
+  const onProductUpdate = () => {
+    console.log("Upadte");
+    setProductUpdate(productUpdate + 1);
+  };
+
+  useEffect(() => {
+    onPageLoad();
+  }, [productUpdate]);
 
   const handleRowClick = (item) => {
     setSelectedRow(item);
     setBtnUpdateProduct(false);
-    console.log("test11",item)
+    console.log("test11", item);
+  };
+
+  const deleteProduct = async (item) => {
+    console.log("delete", item);
+    const response = await fetch(
+      `http://localhost:5000/api/product/deleteproduct/${item.productId}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const json = await response.json();
+    if (json.status) {
+      onProductUpdate();
+    }
   };
   //This function is used to logout from the application
   const logout = () => {
@@ -37,6 +61,7 @@ const Adminportal = () => {
   //This function is used to add the product
   const addProduct = () => {
     setShowModal(true);
+    document.body.classList.add("modal-open");
   };
 
   const updateProduct = () => {
@@ -57,6 +82,7 @@ const Adminportal = () => {
 
   //This is called by above useEffect hook
   const onPageLoad = async () => {
+    console.log();
     const response = await fetch(
       `http://localhost:5000/api/product/getallproducts`,
       {
@@ -68,70 +94,50 @@ const Adminportal = () => {
     );
     retrievedProducts = await response.json();
     setProduct(retrievedProducts);
-    console.log(retrievedProducts);
+    setShowTable(true);
+    Spinner.closeLoader();
   };
 
   //This is Admin portal UI
   return (
-    <div>
-      <div className="loginHeader">
-        <h2>Admin Portal</h2>
-      </div>
-
-      <div>
-        <p>This is admin portal. Dashboard building in progress</p>
-        <button onClick={logout}>Logout</button>
+    <div className="adminPortal">
+      <div className="container">
         <button onClick={addProduct}>Add Product</button>
         <button onClick={updateProduct} disabled={btnUpdateProduct}>
           Update Product
         </button>
+        <div className="loginHeader">
+          <h2>Admin Portal</h2>
+        </div>
+        <div className="logoutButton">
+          <button onClick={logout}>Logout</button>
+        </div>
       </div>
       <div>
         {showModal && (
-          <Addproductmodal closeAddProductModal={closeAddProductModal} />
+          <Addproductmodal
+            closeAddProductModal={closeAddProductModal}
+            onProductUpdate={onProductUpdate}
+          />
         )}
         {showUpdateProductModal && (
           <UpdateProductModal
             closeUpdateProductModal={closeUpdateProductModal}
             selectedProduct={selectedRow}
             updateProduct={updateProduct}
+            onProductUpdate={onProductUpdate}
           />
         )}
       </div>
-      <table>
-        <thead>
-          <tr>
-            <th>Product Name</th>
-            <th>Product Description</th>
-            <th>Product Price</th>
-            <th>Product Category</th>
-            <th>Product Image</th>
-          </tr>
-        </thead>
-        <tbody>
-          {product.map((item) => (
-            <tr
-              key={item.productId}
-              onClick={() => handleRowClick(item)}
-              className={selectedRow === item ? "selected" : ""}
-            >
-              <td>{item.productDescription}</td>
-              <td>{item.productCategory}</td>
-              <td>{item.productPrice}</td>
-              <td>{item.productName}</td>
-
-              <td>
-                <img
-                  src={`data:image/png;base64,${item.productImage}`}
-                  width={100}
-                  height={100}
-                  alt=""
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div>{Spinner.loader && <Loader />}</div>
+      {showTable && (
+        <Admintable
+          product={product}
+          handleRowClick={handleRowClick}
+          selectedRow={selectedRow}
+          deleteProduct={deleteProduct}
+        />
+      )}
     </div>
   );
 };

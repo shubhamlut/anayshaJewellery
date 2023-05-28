@@ -9,18 +9,40 @@ const UpdateProductModal = (props) => {
     productPrice: "",
     productImages: null,
   });
+  function base64toFile(base64String, filename, contentType) {
+    // Decode the base64 string to a byte array
+    const byteCharacters = atob(base64String);
 
+    const byteNumbers = new Array(byteCharacters.length);
+
+    for (let i = 0; i < byteCharacters.length; i++) {
+      byteNumbers[i] = byteCharacters.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    // Create a new Blob object from the byte array
+    const blob = new Blob([byteArray], { type: contentType });
+
+    // Create a new File object from the Blob object
+    const file = new File([blob], filename, { type: contentType });
+    return file;
+  }
   useEffect(() => {
-    onPageLoad();
-    console.log("test");
+    let file = base64toFile(
+      props.selectedProduct.productImage,
+      "fileName.jpeg",
+      "image/png"
+    );
+    onPageLoad(file);
   }, [props.selectedProduct]);
-  const onPageLoad = () => {
+  const onPageLoad = (file) => {
+    //console.log(file)
     setAddProductDetails({
       productName: props.selectedProduct.productName,
       productDescription: props.selectedProduct.productDescription,
       productCategory: props.selectedProduct.productCategory,
       productPrice: props.selectedProduct.productPrice,
-      
+      productImages: file,
     });
   };
   const onChange = (e) => {
@@ -28,24 +50,24 @@ const UpdateProductModal = (props) => {
       ...addProductDetails,
       [e.target.name]: e.target.value,
     });
-    console.log(addProductDetails);
   };
 
   const handleFileChange = (event) => {
-    setAddProductDetails({ ...addProductDetails, file: event.target.files[0] });
+    setAddProductDetails({
+      ...addProductDetails,
+      productImages: event.target.files[0],
+    });
   };
 
   const onSubmitHandle = async (e) => {
     e.preventDefault();
-
     const formData = new FormData();
-    formData.append("productImages", addProductDetails.file);
+    formData.append("productImages", addProductDetails.productImages);
     formData.append("productName", addProductDetails.productName);
     formData.append("productDescription", addProductDetails.productDescription);
     formData.append("productCategory", addProductDetails.productCategory);
     formData.append("productPrice", addProductDetails.productPrice);
 
-    console.log(formData);
     const response = await fetch(
       `http://localhost:5000/api/product/updateproduct/${props.selectedProduct.productId}`,
       {
@@ -54,7 +76,9 @@ const UpdateProductModal = (props) => {
       }
     );
     const json = await response.json();
-    console.log(json);
+    if (json.status) {
+      props.onProductUpdate();
+    }
   };
 
   return (
@@ -65,7 +89,10 @@ const UpdateProductModal = (props) => {
         id="form"
         action=""
       >
-        <button onClick={props.closeUpdateProductModal}>X</button>
+        <a onClick={props.closeUpdateProductModal} className="closeAddModal">
+          <span class="close">&times;</span>
+        </a>
+
         <label htmlFor="productName">Product Name</label>
         <input
           type="text"

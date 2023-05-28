@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+.product-card {
+  margin-top: 15px;
+  width: 200px;
+  height: 270px;
+  /* background-color: #989191; */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+}
+
+.productcardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.actionbuttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 5px;
+  color: #c6c1c7;
+  align-items: center;
+}
+.actionbuttons :hover {
+  color: rgb(18, 12, 5);
+}
+
+.addtobagbutton {
+  margin-top: 12px;
+  margin-left: 10px;
+  margin-right: -6px;
+  width: 80px;
+  background-color: #ffbd03;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.product-name {
+  color: black;
+  font-size: 15px;
+  font-weight: bold;
+  /* margin-left: -118px;
+  padding-left: 10px; */
+}
+
+.product-price {
+  font-weight: light;
+  padding-top: 3px;
+  margin-left: -119px;
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Set the height of the homepage container */
+  overflow: hidden; /* Prevent the scrollable section from overflowing */
+  max-height: calc(
+    100vh - 140px - 100px
+  ); /* Adjust the heights based on the navbar and footer */
+  overflow-y: auto;
+
+  /* justify-content:center ; */
+}
