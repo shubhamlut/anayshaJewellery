@@ -101,7 +101,6 @@ router.post("/updateproduct/:id", upload, async (req, res) => {
       { new: true }
     );
     res.json({ product: product, status: true });
-
   } catch (error) {
     res.status(400).send(error.message);
   }
@@ -113,9 +112,48 @@ router.post("/deleteproduct/:id", async (req, res) => {
   try {
     product = await Products.findByIdAndDelete(req.params.id);
 
-    res.status(200).json({message:"Deleted Successfully",status:true});
+    res.status(200).json({ message: "Deleted Successfully", status: true });
   } catch (error) {
     res.status(400).send(error.message);
   }
 });
+
+//Route 5: Get product by id
+
+router.get("/getproduct/:id", async (req, res) => {
+  try {
+    product = await Products.findById(req.params.id);
+
+    res.status(200).json({
+      productId: product._id,
+      productName: product.productName,
+      productDescription: product.productDescription,
+      productPrice: product.productPrice,
+      productCategory: product.productCategory,
+      productImage: btoa(arrayBufferToString(product.productImage.data)),
+    });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+
+//Route 6: Get products by filter
+router.post("/getproductsbyfilter", async (req, res) => {
+ console.log(req.body)
+  const allproducts = await Products.find({productCategory:{$in:req.body.filterBy}});
+
+  let modifiedProducts = allproducts.map((singleProduct) => {
+    return {
+      productId: singleProduct._id,
+      productName: singleProduct.productName,
+      productDescription: singleProduct.productDescription,
+      productPrice: singleProduct.productPrice,
+      productCategory: singleProduct.productCategory,
+      productImage: btoa(arrayBufferToString(singleProduct.productImage.data)),
+    };
+  });
+  res.status(200).send(modifiedProducts);
+});
+
 module.exports = router;

@@ -1,16 +1,20 @@
-import React from 'react'
-import Body from './Body'
-import Header from './Header'
-import Navbar from './Navbar'
-import SubBody from './SubBody'
+import React, { useEffect } from "react";
+import Body from "./Body";
+import Header from "./Header";
+import Navbar from "./Navbar";
+import SubBody from "./SubBody";
+import Filters from "./Filters";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div>
-      <Body/>
-      <SubBody/>
+      <Body />
+      <div className="home">
+        <Filters />
+        <SubBody products={props.products} showproducts={props.showproducts} />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default React.memo(Home);

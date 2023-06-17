@@ -1,37 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext, navigate } from "react";
+import { useNavigate } from "react-router-dom";
 import imageOne from "../images/alyssa-strohmann-qOIGvGoVNtc-unsplash.jpg";
 import imageTwo from "../images/anastasia-anastasia-nlQFycTD04M-unsplash.jpg";
 import imageThree from "../images/lilartsy-ZhmbakzCBtk-unsplash.jpg";
 import imageFour from "../images/tara-yates-ZL7JpQ3d1Yk-unsplash.jpg";
 import Product from "./Product.js";
+import loaderContext from "../context/loaderContext";
+import productContext from "../context/productContext";
 import SliderImages from "./SliderImages";
-const SubBody = () => {
+import Loader from "./AdminScreen/Loader";
+const SubBody = (props) => {
+  const Spinner = useContext(loaderContext);
+const productState = useContext(productContext)
   const [product, setProduct] = useState([{}]);
+  const [showproducts, setShowproducts] = useState(true);
+  const navigate = useNavigate();
   let retrievedProducts = "";
 
-  useEffect(() => {
-    onPageLoad();
-  }, []);
-
-  const AddToBag = async (orderId, orderPrice,orderName) => {
-    console.log(orderId);
-    const response = await fetch(`http://localhost:5000/api/cart/addtocart`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token"),
-      },
-      body: JSON.stringify({
-        order: orderId,
-        orderAmount: orderPrice,
-        orderName: orderName
-      }),
-    });
-  };
-
   const addtowishlist = async (orderId) => {
-    console.log("wish list");
-
     const response = await fetch(`http://localhost:5000/api/likes/addtolike`, {
       method: "POST",
       headers: {
@@ -39,47 +25,37 @@ const SubBody = () => {
         "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({
-        order: orderId
+        order: orderId,
       }),
     });
   };
-  //This is called by above useEffect hook
-  const onPageLoad = async () => {
-    console.log();
-    const response = await fetch(
-      `http://localhost:5000/api/product/getallproducts`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    retrievedProducts = await response.json();
-    setProduct(retrievedProducts);
-    console.log(retrievedProducts);
-  };
 
+  const handleviewdetails = (productId) => {
+    console.log("view product details");
+    navigate(`/productdetails/${productId}`);
+  };
   return (
-    
-     
-      
-     <div className="test">
+    <div className="test">
       {/* <SliderImages/> */}
-    <div className="productcardContainer">
-      {product.map((item) => (
-        <Product
-          productName={item.productName}
-          productImage={item.productImage}
-          productPrice={item.productPrice}
-          productId={item.productId}
-          AddToBag={AddToBag}
-          addtowishlist={addtowishlist}
-        />
-      ))}
+      {/* <div>{Spinner.loader && <Loader />}</div> */}
+      <div>
+        {productState.showProducts && (
+          <div className="productcardContainer">
+            {productState.filterProducts.map((item) => (
+              <Product
+                productName={item.productName}
+                productImage={item.productImage}
+                productDescription={item.productDescription}
+                productPrice={item.productPrice}
+                productId={item.productId}
+                addtowishlist={addtowishlist}
+                handleviewdetails={handleviewdetails}
+              />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
-    </div>
-    
   );
 };
 

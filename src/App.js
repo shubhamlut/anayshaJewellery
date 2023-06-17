@@ -20,46 +20,52 @@ import Footer from "./components/Footer";
 import Login from "./components/Login";
 import Search from "./components/Search";
 import Globalloginpage from "./components/Globalloginpage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Adminportal from "./components/AdminScreen/Adminportal";
 import LoaderState from "./context/loaderState";
+import ProductState from "./context/productState";
+import ProductDetail from "./components/ProductDetail";
 
 function App() {
   const [showComponents, setShowComponents] = useState(true);
-
-  const handleButtonClick = () => {
-    setShowComponents(true);
-  };
+  const [showproducts, setShowproducts] = useState(false);
+  const [products, setProducts] = useState();
+  let retrievedProducts = "";
 
   return (
     <div>
-      {showComponents ? (
+      <ProductState>
         <LoaderState>
-        <Router>
-          <Header />
-          {/* <Navbar /> */}
+          <Router>
+            <Header />
+            {/* <Navbar /> */}
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/mybag" element={<Mybag />} />
-            <Route path="/userdetails" element={<Userdetails />} />
-            <Route path="/limitededition" element={<LimitedEdition />} />
-            <Route path="/oneofkind" element={<OneOfKindJewellery />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/login" element={<Globalloginpage />} />
-            <Route path="/adminportal" element={<Adminportal />} />
-            <Route path="/adminshubhamlutade" element={<Globalloginpage />} />
-          </Routes>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Home products={products} showproducts={showproducts} />
+                }
+              />
+              <Route path="/wishlist" element={<Wishlist />} />
+              <Route path="/mybag" element={<Mybag />} />
+              <Route path="/userdetails" element={<Userdetails />} />
+              <Route path="/limitededition" element={<LimitedEdition />} />
+              <Route path="/oneofkind" element={<OneOfKindJewellery />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/login" element={<Globalloginpage />} />
+              <Route path="/adminportal" element={<Adminportal />} />
+              <Route path="/adminshubhamlutade" element={<Globalloginpage />} />
+              <Route
+                path="/productdetails/:productId"
+                element={<ProductDetail />}
+              />
+            </Routes>
 
-          <Footer />
-        </Router>
+            <Footer />
+          </Router>
         </LoaderState>
-      ) : (
-        <Router>
-          <Routes></Routes>
-        </Router>
-      )}
+      </ProductState>
     </div>
   );
 }
